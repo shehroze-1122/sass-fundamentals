@@ -1,0 +1,14 @@
+$directions: (t:'top', b:'bottom', l:'left', r: 'right');
+
+@each $dir in $directions{
+    @for $i from 1 through 5 {
+        $size: #{$i*5}px;
+        
+        .m-#{nth($dir, 1)}-#{$size}{
+            margin-#{nth($dir, 2)}: $size;            
+        }
+        .p-#{nth($dir, 1)}-#{$i*5}{
+            padding-#{nth($dir, 2)}: $size;            
+        }
+    }
+}
