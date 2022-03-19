@@ -29,7 +29,25 @@
 
 @function luminance($color) {
   /* REPLACE THIS WITH YOUR REAL FUNCTION */
-  @return 0.5;
+  $r: convertToLinear(red($color)/255);
+  $g: convertToLinear(green($color)/255);
+  $b: convertToLinear(blue($color)/255);
+  
+  @return 0.2126*$r + 0.7152*$g + 0.0722*$b;
+
+}
+
+@function convertToLinear($i) {
+  $a: 0.055;
+
+  @if $i<=0.04045 {
+    @return $i/12.92;
+  }
+  @else{
+    $base: ($i+$a)/(1+$a);
+    $val: pow($base, 2.4);
+    @return $val;
+  }
 }
 
 $white_luminance: luminance(white);
